@@ -19,7 +19,6 @@ const matchDispatchToProps = (dispatch) => {
 
 class ScreenTwo extends Component {
   componentDidMount() {
-    console.log('componentDidMount of screeen 2 called');
     this._unsubscribefocus = this.props.navigation.addListener('focus', () => {
       BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     });
@@ -52,7 +51,6 @@ class ScreenTwo extends Component {
   }
 
   handleBackButton = () => {
-    console.log('back button pressed in screen 2');
     this.props.remove();
     this.props.navigation.pop();
     return false;

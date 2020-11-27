@@ -10,7 +10,6 @@ import * as Screen from '@screens';
 import * as Action from '@actions';
 
 const Stack = createStackNavigator();
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 const matchStateToProps = (state) => {
   return {navState: state.navigationReducer.navigationState};
@@ -23,12 +22,6 @@ const matchDispatchToProps = (dispatch) => {
 };
 
 class StackNavigator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
   stack = (extraProps) => (
     <Stack.Screen
       name={extraProps.name}
@@ -39,38 +32,8 @@ class StackNavigator extends React.Component {
     />
   );
 
-  async componentDidMount() {
-    if (!this.state.isReady) {
-      this.restoreState();
-    }
-  }
-
-  restoreState = async () => {
-    try {
-      const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-      const stateObject = savedStateString
-        ? JSON.parse(savedStateString)
-        : undefined;
-
-      if (stateObject !== undefined) {
-        // console.log(
-        //   'STATE HAS VALUE NEW STATE =  ' + JSON.stringify(stateObject),
-        // );
-      } else {
-        // console.log('state has no value');
-      }
-    } finally {
-      this.setState({
-        isReady: true,
-      });
-    }
-  };
-
   render() {
     const stack = this.stack;
-    if (!this.state.isReady) {
-      return null;
-    }
 
     return (
       <NavigationContainer

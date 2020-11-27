@@ -51,7 +51,6 @@ class ScreenEight extends Component {
   }
 
   handleBackButton = () => {
-    console.log('back button pressed in screen 2');
     this.props.remove();
     this.props.navigation.pop();
     return true;
