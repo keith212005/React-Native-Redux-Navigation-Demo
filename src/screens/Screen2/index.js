@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Button, BackHandler} from 'react-native';
 
+import {NavigationActions} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import {StackActions} from '@react-navigation/native';
 
 import {connect} from 'react-redux';
 import * as Action from '@actions';
@@ -19,15 +21,7 @@ const matchDispatchToProps = (dispatch) => {
 
 class ScreenTwo extends Component {
   componentDidMount() {
-    this._unsubscribefocus = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    });
-    this._unsubscribeblur = this.props.navigation.addListener('blur', () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        this.handleBackButton,
-      );
-    });
+    console.log('Screen2 Mount()...');
 
     this.props.navigation.setOptions({
       headerLeft: () => (
@@ -37,7 +31,7 @@ class ScreenTwo extends Component {
           size={30}
           color="black"
           onPress={() => {
-            this.props.remove();
+            // this.props.remove();
             this.props.navigation.pop();
           }}
         />
@@ -46,15 +40,9 @@ class ScreenTwo extends Component {
   }
 
   componentWillUnmount() {
-    this._unsubscribefocus();
-    this._unsubscribeblur();
-  }
-
-  handleBackButton = () => {
+    console.log('Screen2 unMount()...');
     this.props.remove();
-    this.props.navigation.pop();
-    return false;
-  };
+  }
 
   render() {
     return (

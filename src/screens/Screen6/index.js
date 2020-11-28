@@ -19,15 +19,7 @@ const matchDispatchToProps = (dispatch) => {
 
 class ScreenSix extends Component {
   componentDidMount() {
-    this._unsubscribefocus = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    });
-    this._unsubscribeblur = this.props.navigation.addListener('blur', () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        this.handleBackButton,
-      );
-    });
+    console.log('Screen6 Mount()...');
 
     this.props.navigation.setOptions({
       headerLeft: () => (
@@ -46,15 +38,9 @@ class ScreenSix extends Component {
   }
 
   componentWillUnmount() {
-    this._unsubscribefocus();
-    this._unsubscribeblur();
-  }
-
-  handleBackButton = () => {
+    console.log('Screen6 unMount()...');
     this.props.remove();
-    this.props.navigation.pop();
-    return false;
-  };
+  }
 
   render() {
     return (

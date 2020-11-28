@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {connect} from 'react-redux';
+import Icon from 'react-native-vector-icons/Feather';
 
 import * as Screen from '@screens';
 import * as Action from '@actions';
@@ -41,7 +42,7 @@ class StackNavigator extends React.Component {
         onStateChange={(state) => {
           this.props.storeNavigationState(state);
         }}>
-        <Stack.Navigator initialRouteName="ScreenOne">
+        <Stack.Navigator initialRouteName="ScreenOne" unmountOnBlur={true}>
           {stack({
             name: 'ScreenOne',
             component: Screen.ScreenOne,

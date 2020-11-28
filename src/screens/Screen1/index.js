@@ -15,20 +15,11 @@ const matchDispatchToProps = (dispatch) => {
 
 class ScreenOne extends Component {
   componentDidMount() {
-    this._unsubscribefocus = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    });
-    this._unsubscribeblur = this.props.navigation.addListener('blur', () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        this.handleBackButton,
-      );
-    });
+    console.log('Screen1 Mounted()...');
   }
 
   componentWillUnmount() {
-    this._unsubscribefocus();
-    this._unsubscribeblur();
+    console.log('Screen1 unmounted()...');
   }
 
   handleBackButton = () => {
@@ -41,7 +32,7 @@ class ScreenOne extends Component {
         <Button
           title="Screen 2"
           onPress={() => {
-            this.props.add(this.props.currentCount);
+            this.props.add();
             this.props.navigation.navigate('ScreenTwo');
           }}
         />

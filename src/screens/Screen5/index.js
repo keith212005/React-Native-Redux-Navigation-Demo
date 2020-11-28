@@ -19,15 +19,7 @@ const matchDispatchToProps = (dispatch) => {
 
 class ScreenFive extends Component {
   componentDidMount() {
-    this._unsubscribefocus = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    });
-    this._unsubscribeblur = this.props.navigation.addListener('blur', () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        this.handleBackButton,
-      );
-    });
+    console.log('Screen5 Mount()...');
 
     this.props.navigation.setOptions({
       headerLeft: () => (
@@ -37,7 +29,6 @@ class ScreenFive extends Component {
           size={30}
           color="black"
           onPress={() => {
-            this.props.remove();
             this.props.navigation.pop();
           }}
         />
@@ -46,21 +37,14 @@ class ScreenFive extends Component {
   }
 
   componentWillUnmount() {
-    this._unsubscribefocus();
-    this._unsubscribeblur();
-  }
-
-  handleBackButton = () => {
+    console.log('Screen5 unMount()...');
     this.props.remove();
-    this.props.navigation.pop();
-    return true;
-  };
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={{fontSize: 50}}>Count: {this.props.currentCount}</Text>
-
         <Button
           title="Screen 6"
           onPress={() => {

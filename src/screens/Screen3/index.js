@@ -19,15 +19,7 @@ const matchDispatchToProps = (dispatch) => {
 
 class ScreenThree extends Component {
   componentDidMount() {
-    this._unsubscribefocus = this.props.navigation.addListener('focus', () => {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    });
-    this._unsubscribeblur = this.props.navigation.addListener('blur', () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        this.handleBackButton,
-      );
-    });
+    console.log('Screen3 Mount()...');
 
     this.props.navigation.setOptions({
       headerLeft: () => (
@@ -37,7 +29,7 @@ class ScreenThree extends Component {
           size={30}
           color="black"
           onPress={() => {
-            this.props.remove();
+            // this.props.remove();
             this.props.navigation.pop();
           }}
         />
@@ -46,15 +38,9 @@ class ScreenThree extends Component {
   }
 
   componentWillUnmount() {
-    this._unsubscribefocus();
-    this._unsubscribeblur();
-  }
-
-  handleBackButton = () => {
+    console.log('Screen3 unMount()...');
     this.props.remove();
-    this.props.navigation.pop();
-    return true;
-  };
+  }
 
   render() {
     return (
