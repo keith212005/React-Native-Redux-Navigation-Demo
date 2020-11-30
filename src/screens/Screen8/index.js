@@ -15,7 +15,7 @@ class ScreenEight extends Component {
 
   componentWillUnmount() {
     console.log('Screen8 unMount()...');
-    this.props.removeFromCountere();
+    this.props.removeFromCounter();
   }
 
   render() {

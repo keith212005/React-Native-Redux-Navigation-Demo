@@ -15,7 +15,7 @@ class ScreenSix extends Component {
 
   componentWillUnmount() {
     console.log('Screen6 unMount()...');
-    this.props.removeFromCountere();
+    this.props.removeFromCounter();
   }
 
   render() {

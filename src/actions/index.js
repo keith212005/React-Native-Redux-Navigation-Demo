@@ -9,4 +9,4 @@ export {storeNavigation} from './navigationAction';
 
 export const bindCountActions = Object.assign({}, countActions);
 
-// console.log('bindCountActions = ' + JSON.stringify(bindCountActions));
+console.log('bindCountActions = ' + JSON.stringify(bindCountActions));
