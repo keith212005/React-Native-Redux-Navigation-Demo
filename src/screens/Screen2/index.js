@@ -6,42 +6,18 @@ import Icon from 'react-native-vector-icons/Feather';
 import {StackActions} from '@react-navigation/native';
 
 import {connect} from 'react-redux';
-import * as Action from '@actions';
+import {bindActionCreators} from 'redux';
 
-const matchStateToProps = (state) => {
-  return {currentCount: state.countReducer.count};
-};
-
-const matchDispatchToProps = (dispatch) => {
-  return {
-    add: () => dispatch(Action.addToCounter()),
-    remove: () => dispatch(Action.removeFromCounter()),
-  };
-};
+import {bindCountActions} from '@actions';
 
 class ScreenTwo extends Component {
   componentDidMount() {
     console.log('Screen2 Mount()...');
-
-    this.props.navigation.setOptions({
-      headerLeft: () => (
-        <Icon
-          style={{marginLeft: 5}}
-          name="arrow-left"
-          size={30}
-          color="black"
-          onPress={() => {
-            // this.props.remove();
-            this.props.navigation.pop();
-          }}
-        />
-      ),
-    });
   }
 
   componentWillUnmount() {
     console.log('Screen2 unMount()...');
-    this.props.remove();
+    this.props.removeFromCounter();
   }
 
   render() {
@@ -52,7 +28,7 @@ class ScreenTwo extends Component {
         <Button
           title="Screen 3"
           onPress={() => {
-            this.props.add();
+            this.props.addToCounter();
             this.props.navigation.navigate('ScreenThree');
           }}
         />
@@ -60,6 +36,13 @@ class ScreenTwo extends Component {
     );
   }
 }
+
+const matchStateToProps = (state) => {
+  return {currentCount: state.countReducer.count};
+};
+
+const matchDispatchToProps = (dispatch) =>
+  bindActionCreators(bindCountActions, dispatch);
 
 const styles = StyleSheet.create({
   container: {

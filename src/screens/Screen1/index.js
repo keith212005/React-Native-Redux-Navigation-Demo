@@ -1,30 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Button, BackHandler} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import * as Action from '@actions';
-
-const matchStateToProps = (state) => {
-  return {currentCount: state.countReducer.count};
-};
-
-const matchDispatchToProps = (dispatch) => {
-  return {add: () => dispatch(Action.addToCounter())};
-};
+import {bindCountActions} from '@actions';
 
 class ScreenOne extends Component {
-  componentDidMount() {
-    console.log('Screen1 Mounted()...');
-  }
-
-  componentWillUnmount() {
-    console.log('Screen1 unmounted()...');
-  }
-
-  handleBackButton = () => {
-    return true;
-  };
   render() {
     return (
       <View style={styles.container}>
@@ -32,7 +14,7 @@ class ScreenOne extends Component {
         <Button
           title="Screen 2"
           onPress={() => {
-            this.props.add();
+            this.props.addToCounter();
             this.props.navigation.navigate('ScreenTwo');
           }}
         />
@@ -48,5 +30,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+const matchStateToProps = (state) => {
+  return {currentCount: state.countReducer.count};
+};
+
+const matchDispatchToProps = (dispatch) =>
+  bindActionCreators(bindCountActions, dispatch);
 
 export default connect(matchStateToProps, matchDispatchToProps)(ScreenOne);
